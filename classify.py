@@ -2,20 +2,22 @@
 
 from PIL import Image
 import os
+import numpy
 
 east = os.listdir(path='hldata/east')
 north = os.listdir(path='hldata/north')
 west = os.listdir(path='hldata/west')
 south = os.listdir(path='hldata/south')
 
-def imgbytes(region, regionname):
+def toarray(region, regionname):
 	imlist = []
 	for file in region:
-		if file.endswith('.png'):
+		if file.endswith('.jpg'):
 			im = Image.open("hldata/" + regionname + "/" + file)
-			imlist.append(im.tobytes())
+			imlist.append(numpy.array(im))
 	return imlist
 
-testlist = imgbytes(east, "east")
-
-print(testlist[0])
+eastlist = toarray(east, "east")
+northlist = toarray(north, "north")
+westlist = toarray(west, "west")
+southlist = toarray(south, "south")

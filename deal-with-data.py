@@ -10,10 +10,11 @@ south = os.listdir(path='hldata/south')
 
 def resizeimg(region, regionname):
 	for file in region:
-		if file.endswith('.png'):
+		if file.endswith('.jpg'):
 			name = "hldata/" + regionname + "/" + file
 			im = Image.open(name)
 			new = im.resize((30, 19))
+			new = new.convert("RGB")
 			new.save(name)
 
 resizeimg(east, "east")
@@ -24,8 +25,8 @@ resizeimg(south, "south")
 def renameimg(region, regionname):
 	count = 1
 	for file in region:
-		if file.endswith('.png'):
-			os.rename("hldata/" + regionname + "/" + file, "hldata/" + regionname + "/" + str(count) + '.png')
+		if file.endswith('.jpg'):
+			os.rename("hldata/" + regionname + "/" + file, "hldata/" + regionname + "/" + str(count) + '.jpg')
 			count = count + 1
 
 renameimg(east, "east")
