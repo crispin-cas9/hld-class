@@ -79,7 +79,7 @@ for imagePath in imagePaths:
  
 	# extract the class label from the image path and update the
 	# labels list
-	label = imagePath.split(os.path.sep)[-1]
+	label = imagePath.split(os.path.sep)[-2]
 	if label == "east":
 		label = [1, 0, 0, 0] 
 	if label == "north":
@@ -100,11 +100,44 @@ labels = np.array(labels)
 	labels, test_size=0.25, random_state=42)
  
 # convert the labels from integers to vectors
-trainY = to_categorical(trainY, num_classes=2)
-testY = to_categorical(testY, num_classes=2)
+# trainY = to_categorical(trainY, num_classes=2)
+# testY = to_categorical(testY, num_classes=2)
 
 # construct the image generator for data augmentation
 aug = ImageDataGenerator(rotation_range=30, width_shift_range=0.1,
 	height_shift_range=0.1, shear_range=0.2, zoom_range=0.2,
 	horizontal_flip=True, fill_mode="nearest")
+
+# initialize the model
+print("[INFO] compiling model...")
+model = LeNet.build(width=28, height=28, depth=3, classes=4)
+opt = Adam(lr=INIT_LR, decay=INIT_LR / EPOCHS)
+model.compile(loss="binary_crossentropy", optimizer=opt,
+	metrics=["accuracy"])
+ 
+# train the network
+print("[INFO] training network...")
+H = model.fit_generator(aug.flow(trainX, trainY, batch_size=BS),
+	validation_data=(testX, testY), steps_per_epoch=len(trainX) // BS,
+	epochs=EPOCHS, verbose=1)
+ 
+# save the model to disk
+print("[INFO] serializing network...")
+model.save(args["model"])
+
+# plot the training loss and accuracy
+plt.style.use("ggplot")
+plt.figure()
+N = EPOCHS
+plt.plot(np.arange(0, N), H.history["loss"], label="train_loss")
+plt.plot(np.arange(0, N), H.history["val_loss"], label="val_loss")
+plt.plot(np.arange(0, N), H.history["acc"], label="train_acc")
+plt.plot(np.arange(0, N), H.history["val_acc"], label="val_acc")
+plt.title("Training Loss and Accuracy on HLD Classification")
+plt.xlabel("Epoch #")
+plt.ylabel("Loss/Accuracy")
+plt.legend(loc="lower left")
+plt.savefig(args["plot"])
+
+
 
