@@ -17,15 +17,15 @@ def resizeimg(region, regionname):
 			new = new.convert("RGB")
 			new.save(name)
 
-resizeimg(east, "east")
-resizeimg(north, "north")
-resizeimg(west, "west")
-resizeimg(south, "south")
+# resizeimg(east, "east")
+# resizeimg(north, "north")
+# resizeimg(west, "west")
+# resizeimg(south, "south")
 
 def renameimg(region, regionname):
 	count = 1
 	for file in region:
-		if file.endswith('.jpg'):
+		if file.endswith('.png'):
 			os.rename("hldata/" + regionname + "/" + file, "hldata/" + regionname + "/" + str(count) + '.jpg')
 			count = count + 1
 
