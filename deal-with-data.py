@@ -1,5 +1,7 @@
 # classifying screenshots from the four different regions of the video game Hyper Light Drifter
 
+# this code is no longer needed, but I wrote it entirely myself (as opposed to most of the other files) so I'm going to keep it. Don't run this!!
+
 from PIL import Image
 import os
 

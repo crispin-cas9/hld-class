@@ -10,7 +10,7 @@ from keras.optimizers import Adam
 from sklearn.model_selection import train_test_split
 from keras.preprocessing.image import img_to_array
 from keras.utils import to_categorical
-from lenet import LeNet
+from lenet import lenetbuild
 from imutils import paths
 from PIL import Image
 import matplotlib.pyplot as plt
@@ -19,28 +19,6 @@ import argparse
 import random
 import cv2
 import os
-
-
-east = os.listdir(path='hldata/east')
-north = os.listdir(path='hldata/north')
-west = os.listdir(path='hldata/west')
-south = os.listdir(path='hldata/south')
-
-def toarray(region, regionname):
-	imlist = []
-	for file in region:
-		if file.endswith('.jpg'):
-			im = Image.open("hldata/" + regionname + "/" + file)
-			imlist.append(np.array(im))
-	return imlist
-
-eastlist = toarray(east, "east")
-northlist = toarray(north, "north")
-westlist = toarray(west, "west")
-southlist = toarray(south, "south")
-
-#data = eastlist + northlist + westlist + southlist
-
 
 
 # construct the argument parse and parse the arguments
@@ -110,7 +88,8 @@ aug = ImageDataGenerator(rotation_range=30, width_shift_range=0.1,
 
 # initialize the model
 print("[INFO] compiling model...")
-model = LeNet.build(width=28, height=28, depth=3, classes=4)
+# width and height of the image, depth = number of channels, classes = 4 regions
+model = lenetbuild(width=28, height=28, depth=3, classes=4)
 opt = Adam(lr=INIT_LR, decay=INIT_LR / EPOCHS)
 model.compile(loss="binary_crossentropy", optimizer=opt,
 	metrics=["accuracy"])

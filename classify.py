@@ -1,5 +1,7 @@
 # classifying screenshots from the four different regions of the video game Hyper Light Drifter
 
+# don't run this; it's not needed for classification
+
 from PIL import Image
 import os
 import numpy

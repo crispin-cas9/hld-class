@@ -9,7 +9,7 @@ import imutils
 import cv2
 
 
-# construct the argument parse and parse the arguments
+# argument parse - add command line arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-m", "--model", required=True,
 	help="path to trained model model")
@@ -17,7 +17,7 @@ ap.add_argument("-i", "--image", required=True,
 	help="path to input image")
 args = vars(ap.parse_args())
 
-# load the image
+# load the image and copy it
 image = cv2.imread(args["image"])
 orig = image.copy()
  
@@ -34,7 +34,7 @@ model = load_model(args["model"])
 # classify the input image
 (east, north, west, south) = model.predict(image)[0]
 
-# build the label
+# build the labels (come back and make this more elegant later)
 if east > north and east > west and east > south:
 	label = "East"
 if north > east and north > west and north > south:
