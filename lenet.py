@@ -20,18 +20,13 @@ def lenetbuild(width, height, depth, classes):
 		inputShape = (depth, height, width)
 	
 	# first set of CONV => RELU => POOL layers
-	model.add(Conv2D(70, (5, 5), padding="same",
+	model.add(Conv2D(20, (5, 5), padding="same",
 		input_shape=inputShape))
 	model.add(Activation("relu"))
 	model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
 	
 	# second set of CONV => RELU => POOL layers
 	model.add(Conv2D(50, (5, 5), padding="same"))
-	model.add(Activation("relu"))
-	model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
-	
-	# third, because I want to see if it does better or worse
-	model.add(Conv2D(20, (5, 5), padding="same"))
 	model.add(Activation("relu"))
 	model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
 	
