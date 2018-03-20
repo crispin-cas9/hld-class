@@ -17,7 +17,7 @@ ap.add_argument("-m", "--model", required=True,
 # 	help="path to input image")
 args = vars(ap.parse_args())
 
-def testimg(img):
+def testimg(img, count):
 
 	# load the image and copy it
 	#image = cv2.imread(args["image"])
@@ -61,11 +61,10 @@ def testimg(img):
 	# draw the label on the image
 	output = imutils.resize(orig, width=400)
 	cv2.putText(output, label, (10, 25),  cv2.FONT_HERSHEY_SIMPLEX,
-		0.7, (0, 255, 0), 2)
- 
+		0.7, (255, 255, 255), 2)
+	
+	cv2.imwrite("guesses/" + str(count) + "-e75.jpg", output)
+	
 	# show the output image
-	cv2.imshow("Output", output)
-	cv2.waitKey(0)
-
-testimg("hldata/east/4.jpg")
+	#cv2.imshow("Output", output)
 
