@@ -7,6 +7,7 @@ import numpy as np
 import argparse
 import imutils
 import cv2
+import os
 
 
 # argument parse - add command line arguments
@@ -63,8 +64,18 @@ def testimg(img, count):
 	cv2.putText(output, label, (10, 25),  cv2.FONT_HERSHEY_SIMPLEX,
 		0.7, (255, 255, 255), 2)
 	
-	cv2.imwrite("guesses/" + str(count) + "-e75.jpg", output)
+	cv2.imwrite("guesses/" + str(count) + "-test.jpg", output)
 	
 	# show the output image
 	#cv2.imshow("Output", output)
+	
+testdata = os.listdir(path='testing')
+count = 1
+
+for file in testdata:
+	if file.endswith('.jpg'):
+		name = "testing/" + file
+		testimg(name, count)
+		count = count + 1
+
 

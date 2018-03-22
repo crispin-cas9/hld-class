@@ -19,9 +19,12 @@ def lenetbuild(width, height, depth, classes):
 	if K.image_data_format() == "channels_first":
 		inputShape = (depth, height, width)
 	
+	# another conv layer
+	model.add(Conv2D(20, (5, 5), padding="same", input_shape=inputShape))
+	model.add(Activation("relu"))
+	
 	# first set of CONV => RELU => POOL layers
-	model.add(Conv2D(20, (5, 5), padding="same",
-		input_shape=inputShape))
+	model.add(Conv2D(20, (5, 5), padding="same", input_shape=inputShape))
 	model.add(Activation("relu"))
 	model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
 	
@@ -29,6 +32,10 @@ def lenetbuild(width, height, depth, classes):
 	model.add(Conv2D(50, (5, 5), padding="same"))
 	model.add(Activation("relu"))
 	model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
+	
+	# another conv layer
+	model.add(Conv2D(20, (5, 5), padding="same", input_shape=inputShape))
+	model.add(Activation("relu"))
 	
 	# first (and only) set of FC => RELU layers
 	model.add(Flatten())

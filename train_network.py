@@ -33,7 +33,7 @@ args = vars(ap.parse_args())
 
 # initialize the number of epochs to train for, initial learning rate,
 # and batch size
-EPOCHS = 75
+EPOCHS = 65
 INIT_LR = 1e-3
 BS = 32
  
@@ -112,7 +112,7 @@ plt.plot(np.arange(0, N), H.history["loss"], label="train_loss")
 plt.plot(np.arange(0, N), H.history["val_loss"], label="val_loss")
 plt.plot(np.arange(0, N), H.history["acc"], label="train_acc")
 plt.plot(np.arange(0, N), H.history["val_acc"], label="val_acc")
-plt.title("Training Loss and Accuracy on HLD Classification")
+plt.title("conv layer before and after pooling")
 plt.xlabel("Epoch #")
 plt.ylabel("Loss/Accuracy")
 plt.legend(loc="lower left")
