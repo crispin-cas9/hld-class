@@ -28,7 +28,7 @@ def renameimg(region, regionname):
 	count = 1
 	for file in region:
 		if file.endswith('.png'):
-			os.rename("hldata/" + regionname + "/" + file, "hldata/" + regionname + "/" + str(count) + '.jpg')
+			os.rename("hldata/" + regionname + "/" + file, "hldata/" + regionname + "/" + str(count) + '.png')
 			count = count + 1
 
 renameimg(east, "east")
