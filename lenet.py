@@ -20,8 +20,8 @@ def lenetbuild(width, height, depth, classes):
 		inputShape = (depth, height, width)
 	
 	# another conv layer
-	model.add(Conv2D(20, (5, 5), padding="same", input_shape=inputShape))
-	model.add(Activation("relu"))
+	# model.add(Conv2D(20, (5, 5), padding="same", input_shape=inputShape))
+# 	model.add(Activation("relu"))
 	
 	# first set of CONV => RELU => POOL layers
 	model.add(Conv2D(20, (5, 5), padding="same", input_shape=inputShape))
