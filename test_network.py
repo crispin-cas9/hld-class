@@ -73,7 +73,7 @@ testdata = os.listdir(path='testing')
 count = 1
 
 for file in testdata:
-	if file.endswith('.jpg'):
+	if file.endswith('.jpg') or file.endswith('.png'):
 		name = "testing/" + file
 		testimg(name, count)
 		count = count + 1
