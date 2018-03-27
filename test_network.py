@@ -48,20 +48,24 @@ def testimg(img, count):
 	if south > north and south > west and south > east:
 		label = "South"
 
-	if east > north and east > west and east > south:
-		proba = east
-	if north > east and north > west and north > south:
-		proba = north
-	if west > north and west > east and west > south:
-		proba = west
-	if south > north and south > west and south > east:
-		proba = south
-
-	label = "{}: {:.2f}%".format(label, proba * 100)
+	eastlabel = "East " + str(round(east*100, 3))
+	northlabel = "North: " + str(round(north*100, 3))
+	westlabel = "West: " + str(round(west*100, 3))
+	southlabel = "South: " + str(round(south*100, 3))
+	
+	#"{}: {:.2f}%".format(label, proba * 100)
  
 	# draw the label on the image
 	output = imutils.resize(orig, width=400)
 	cv2.putText(output, label, (10, 25),  cv2.FONT_HERSHEY_SIMPLEX,
+		0.7, (255, 255, 255), 2)
+	cv2.putText(output, eastlabel, (10, 50),  cv2.FONT_HERSHEY_SIMPLEX,
+		0.7, (255, 255, 255), 2)
+	cv2.putText(output, northlabel, (10, 100),  cv2.FONT_HERSHEY_SIMPLEX,
+		0.7, (255, 255, 255), 2)
+	cv2.putText(output, westlabel, (10, 150),  cv2.FONT_HERSHEY_SIMPLEX,
+		0.7, (255, 255, 255), 2)
+	cv2.putText(output, southlabel, (10, 200),  cv2.FONT_HERSHEY_SIMPLEX,
 		0.7, (255, 255, 255), 2)
 	
 	cv2.imwrite("guesses/" + str(count) + "-test.jpg", output)
