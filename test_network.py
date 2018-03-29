@@ -60,13 +60,13 @@ def testimg(img, count):
 	cv2.putText(output, label, (10, 25),  cv2.FONT_HERSHEY_SIMPLEX,
 		0.7, (255, 255, 255), 2)
 	cv2.putText(output, eastlabel, (10, 50),  cv2.FONT_HERSHEY_SIMPLEX,
-		0.7, (255, 255, 255), 2)
-	cv2.putText(output, northlabel, (10, 100),  cv2.FONT_HERSHEY_SIMPLEX,
-		0.7, (255, 255, 255), 2)
-	cv2.putText(output, westlabel, (10, 150),  cv2.FONT_HERSHEY_SIMPLEX,
-		0.7, (255, 255, 255), 2)
-	cv2.putText(output, southlabel, (10, 200),  cv2.FONT_HERSHEY_SIMPLEX,
-		0.7, (255, 255, 255), 2)
+		0.6, (255, 255, 255), 2)
+	cv2.putText(output, northlabel, (10, 75),  cv2.FONT_HERSHEY_SIMPLEX,
+		0.6, (255, 255, 255), 2)
+	cv2.putText(output, westlabel, (10, 100),  cv2.FONT_HERSHEY_SIMPLEX,
+		0.6, (255, 255, 255), 2)
+	cv2.putText(output, southlabel, (10, 125),  cv2.FONT_HERSHEY_SIMPLEX,
+		0.6, (255, 255, 255), 2)
 	
 	cv2.imwrite("guesses/" + str(count) + "-test.jpg", output)
 	
